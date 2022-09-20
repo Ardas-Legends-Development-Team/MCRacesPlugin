@@ -1,0 +1,5 @@
+name: Races
+version: 1.6
+main: com.jukoz.races.Races
+authors: [ Jukoz ]
+description: Brings races with powers and weaknesses. Depends on GroupManager plugin.
