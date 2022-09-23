@@ -1,7 +1,7 @@
-package com.jukoz.races.LoopTasks;
+package com.jukoz.racesplugin.LoopTasks;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffect;
@@ -12,7 +12,7 @@ public class PassiveEffects {
 
     public void applyEffectsToAllPlayers() {
         for(Player player : Bukkit.getOnlinePlayers()){
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(player);
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(player);
 
             switch(group) {
                 case ELF:

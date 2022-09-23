@@ -1,8 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
-import org.bukkit.Sound;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,8 +15,8 @@ public class OnEat implements Listener {
     public void PlayerItemConsumeEvent(PlayerItemConsumeEvent event) {
         if (isMeat(event.getItem().toString())) {
             Player player = event.getPlayer();
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(player);
-            if (group == RacesGroup.ELF) {
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(player);
+            if (group == AvailableRacesEnum.ELF) {
                 event.setCancelled(true);
                 player.sendMessage("You are sick from meat!");
                 //player.addPotionEffect(new PotionEffect(PotionEffectType.HUNGER, 600, 99));

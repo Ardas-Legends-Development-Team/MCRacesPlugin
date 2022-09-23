@@ -1,7 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.Sound;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -18,10 +18,10 @@ public class EntityShootBowEvent implements Listener {
         Entity shooter = event.getEntity();
         if(bow.getType().toString().contains("BOW") && shooter.getType() == EntityType.PLAYER) {
             Player player = (Player) shooter;
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(player);
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(player);
 
             if(bow.getType().toString().contains("BOW") && !bow.getType().toString().contains("CROSS")) {
-                if(group == RacesGroup.DWARF) {
+                if(group == AvailableRacesEnum.DWARF) {
                     player.sendMessage("You cannot use a bow!");
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
                     event.getProjectile().remove();
@@ -29,7 +29,7 @@ public class EntityShootBowEvent implements Listener {
             }
 
             if(bow.getType().toString().contains("CROSS")) {
-                if(group == RacesGroup.ELF) {
+                if(group == AvailableRacesEnum.ELF) {
                     player.sendMessage("You cannot use a crossbow!");
                     player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_NO, 1f, 1f);
                     event.getProjectile().remove();

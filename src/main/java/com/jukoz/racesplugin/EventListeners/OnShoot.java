@@ -1,7 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -16,9 +16,9 @@ public class OnShoot implements Listener {
     public void EntityShootBowEvent(EntityShootBowEvent event) {
         if(event.getEntityType() == EntityType.PLAYER) {
             Player player = (Player) event.getEntity();
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(player);
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(player);
 
-            if (group == RacesGroup.ELF) {
+            if (group == AvailableRacesEnum.ELF) {
                 Projectile arrow = (Projectile) event.getProjectile();
                 Vector velocity = arrow.getVelocity().multiply(1.5f);
                 arrow.setVelocity(velocity);

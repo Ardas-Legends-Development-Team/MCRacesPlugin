@@ -1,7 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -14,18 +14,18 @@ public class OnTakeDamage implements Listener {
     public void onEntityDamage (EntityDamageEvent event) {
         if(event.getEntityType() == EntityType.PLAYER) {
             Player player = (Player) event.getEntity();
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(player);
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(player);
 
             if(event.getCause() == EntityDamageEvent.DamageCause.FALL) {
-                if(group == RacesGroup.ELF) {
+                if(group == AvailableRacesEnum.ELF) {
                     event.setDamage(event.getDamage() * 0.7f);
                 }
             }
-            if(group == RacesGroup.DWARF) {
+            if(group == AvailableRacesEnum.DWARF) {
                 event.setDamage(event.getDamage() * 0.95f);
-            } else if(group == RacesGroup.TROLL) {
+            } else if(group == AvailableRacesEnum.TROLL) {
                 event.setDamage(event.getDamage() * 0.8f);
-            } else if(group == RacesGroup.WIZARD || group == RacesGroup.NAZGUL) {
+            } else if(group == AvailableRacesEnum.WIZARD || group == AvailableRacesEnum.NAZGUL) {
                 event.setDamage(event.getDamage() * 0.9f);
             }
         }

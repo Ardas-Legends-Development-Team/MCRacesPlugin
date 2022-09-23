@@ -1,4 +1,4 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

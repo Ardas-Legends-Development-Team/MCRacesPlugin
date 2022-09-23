@@ -1,6 +1,8 @@
-package com.jukoz.races.Repository;
+package com.jukoz.racesplugin.Repository;
 
-import com.jukoz.races.Console.MessageInterceptorCommandRunner;
+import com.jukoz.racesplugin.Console.MessageInterceptorCommandRunner;
+import com.jukoz.racesplugin.Race;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,7 +14,7 @@ import java.util.HashMap;
 import java.util.UUID;
 
 public class PlayerGroupsManager implements Listener {
-    public static HashMap<UUID, RacesGroup> playersGroup;
+    public static HashMap<UUID, AvailableRacesEnum> playersGroup;
     private static final MessageInterceptorCommandRunner cmdRunner = new MessageInterceptorCommandRunner(Bukkit.getConsoleSender());;
     public static final String GET_PLAYER_GROUP_COMMAND = "manwhois ";
     public static final String GET_PLAYER_WORLD_COMMAND = "manselect ";
@@ -25,16 +27,14 @@ public class PlayerGroupsManager implements Listener {
     private static void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
         if(!playersGroup.containsKey(player.getUniqueId())) {
-            playersGroup.put(player.getUniqueId(), convertStringToGroup(getPlayerGroupString(player)));
+            playersGroup.put(player.getUniqueId(), convertStringToRaceEnum(getPlayerGroupString(player)));
         }
     }
 
     @EventHandler
     private static void onPlayerQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if(playersGroup.containsKey(player.getUniqueId())) {
-            playersGroup.remove(player.getUniqueId());
-        }
+        playersGroup.remove(player.getUniqueId());
     }
 
     private static String getPlayerGroupString(Player player) {
@@ -50,19 +50,29 @@ public class PlayerGroupsManager implements Listener {
         return output;
     }
 
-    public static RacesGroup getGroupFromPlayer(Player player) {
+    public static AvailableRacesEnum getRaceEnumFromPlayer(Player player) {
         if(!playersGroup.containsKey(player.getUniqueId())) {
-            playersGroup.put(player.getUniqueId(), convertStringToGroup(getPlayerGroupString(player)));
+            playersGroup.put(player.getUniqueId(), convertStringToRaceEnum(getPlayerGroupString(player)));
         }
         return playersGroup.get(player.getUniqueId());
     }
 
-    public static RacesGroup convertStringToGroup(String group) {
-        for (RacesGroup enumGroup: RacesGroup.values()) {
+    public static Race getPlayerRace(UUID uuid) throws ClassNotFoundException {
+        if(playersGroup.containsKey(uuid)){
+            AvailableRacesEnum raceName=playersGroup.get(uuid);
+            return AvailableRacesEnum.getRace(raceName);
+        }
+        return null;
+    }
+
+    public static AvailableRacesEnum convertStringToRaceEnum(String group) {
+        for (AvailableRacesEnum enumGroup: AvailableRacesEnum.values()) {
             if(group.contains((enumGroup.name()))) {
                 return enumGroup;
             }
         }
-        return RacesGroup.NONE;
+        return AvailableRacesEnum.NONE;
     }
+
+
 }

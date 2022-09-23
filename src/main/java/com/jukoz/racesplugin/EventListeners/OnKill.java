@@ -1,7 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,9 +17,9 @@ public class OnKill implements Listener {
     {
         Player killer = e.getEntity().getKiller();
 
-        RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(killer);
+        AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(killer);
 
-        if (group == RacesGroup.HUMAN) {
+        if (group == AvailableRacesEnum.HUMAN) {
             killer.addPotionEffect(new PotionEffect(PotionEffectType.ABSORPTION, HUMAN_KILL_BUFF_TIME, 0));
             killer.addPotionEffect(new PotionEffect(PotionEffectType.REGENERATION, HUMAN_KILL_BUFF_TIME, 0));
         }

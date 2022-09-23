@@ -1,19 +1,19 @@
-package com.jukoz.races;
+package com.jukoz.racesplugin;
 
-import com.jukoz.races.EventListeners.*;
-import com.jukoz.races.LoopTasks.PassiveEffects;
-import com.jukoz.races.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.EventListeners.*;
+import com.jukoz.racesplugin.LoopTasks.PassiveEffects;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
-public final class Races extends JavaPlugin implements Listener {
+public final class RacesPlugin extends JavaPlugin implements Listener {
     PassiveEffects passiveEffects;
     PlayerGroupsManager playerGroupsManager;
 
     @Override
     public void onEnable() {
-        getLogger().info("Initializing Races Plugin");
+        getLogger().info("Initializing RacesPlugin Plugin");
 
         playerGroupsManager = new PlayerGroupsManager();
 
@@ -30,12 +30,12 @@ public final class Races extends JavaPlugin implements Listener {
         passiveEffects = new PassiveEffects();
         effectUpdate();
 
-        getLogger().info("Finished initializing Races Plugin");
+        getLogger().info("Finished initializing RacesPlugin Plugin");
     }
 
     @Override
     public void onDisable() {
-        getLogger().info("Disabling Races Plugin");
+        getLogger().info("Disabling RacesPlugin Plugin");
     }
 
     public void effectUpdate() {

@@ -1,5 +1,5 @@
-name: Races
+name: RacesPlugin
 version: 1.6
-main: com.jukoz.races.Races
+main: com.jukoz.racesplugin.RacesPlugin
 authors: [ Jukoz ]
-description: Brings races with powers and weaknesses. Depends on GroupManager plugin.
+description: Brings racesplugin with powers and weaknesses. Depends on GroupManager plugin.

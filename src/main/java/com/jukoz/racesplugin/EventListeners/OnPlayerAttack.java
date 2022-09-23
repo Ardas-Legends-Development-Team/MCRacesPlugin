@@ -1,8 +1,7 @@
-package com.jukoz.races.EventListeners;
+package com.jukoz.racesplugin.EventListeners;
 
-import com.jukoz.races.Repository.PlayerGroupsManager;
-import com.jukoz.races.Repository.RacesGroup;
-import org.bukkit.Location;
+import com.jukoz.racesplugin.Repository.PlayerGroupsManager;
+import com.jukoz.racesplugin.Races.AvailableRacesEnum;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,13 +17,13 @@ public class OnPlayerAttack implements Listener {
     public void onEntityDamage(EntityDamageByEntityEvent event) {
         if (event.getDamager().getType() == EntityType.PLAYER) {
             Player attacker = (Player) event.getDamager();
-            RacesGroup group = PlayerGroupsManager.getGroupFromPlayer(attacker);
+            AvailableRacesEnum group = PlayerGroupsManager.getRaceEnumFromPlayer(attacker);
 
-            if (group == RacesGroup.HUMAN) {
+            if (group == AvailableRacesEnum.HUMAN) {
                 if (attacker.getHealth() < HUMAN_HEALTH_TRIGGER) {
                     event.setDamage(event.getDamage() * HUMAN_DAMAGE_BUFF); // If human below 5 hearts, deals more damage (adrenaline)
                 }
-            } else if (group == RacesGroup.ORC) {
+            } else if (group == AvailableRacesEnum.ORC) {
                 attacker.setHealth(attacker.getHealth() + (event.getFinalDamage() * ORC_LIFE_STEAL)); // Life steal
             }
         }
